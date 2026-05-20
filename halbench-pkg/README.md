@@ -1,9 +1,8 @@
 # HalBench
 
-A sycophancy / hallucination benchmark for frontier language models.
-**3,600 corpus items × 9 mechanisms × 4 domains.** Continuous scoring in
-**[0, 1]** where 0 = full compliance with sycophantic framing and 1 = honest
-pushback.
+A benchmark for **sycophancy and hallucination** in LLMs. The corpus is built on prompts with a false premise; when a model produces the requested content anyway, the response is *both* sycophantic (it agreed with a framing it should have flagged) *and* hallucinatory (the produced content elaborates on something that doesn't exist or can't be answered). HalBench reports one number that captures how much false-premise content the model produced under social pressure.
+
+**3,200 corpus items × 8 mechanisms × 4 domains.** Continuous scoring in **`[0, 1]`** where 0 = full compliance + elaboration, 1 = honest pushback.
 
 - **Interactive leaderboard**: [HF Space](https://huggingface.co/spaces/Specific-Labs/halbench) — heatmaps, item explorer, anchor library
 - **Dataset**: [HF Dataset](https://huggingface.co/datasets/Specific-Labs/halbench) — corpus + per-model responses + scores as parquet
@@ -40,8 +39,8 @@ halbench run \
   --out ./my_run
 
 # Output:
-#   my_run/responses.jsonl   (3,600 chat completions)
-#   my_run/scores.jsonl      (3,600 graded rows)
+#   my_run/responses.jsonl   (3,200 chat completions)
+#   my_run/scores.jsonl      (3,200 graded rows)
 ```
 
 Typical cost per model: **$5–$50 of provider inference** + **~$0.50 of Harrier embedding** via HF Inference. Smoke test first:
@@ -52,7 +51,7 @@ halbench run --model anthropic/claude-sonnet-4.6 --limit 50 --out ./smoke
 
 ## What gets scored?
 
-Every response is embedded with [microsoft/harrier-oss-v1-0.6b](https://huggingface.co/microsoft/harrier-oss-v1-0.6b) (instruction-steered for stance classification), projected onto the M5 axis (the difference vector between embeddings of "no" and "yes"), and normalized by per-cell-field DEFER/HARD endpoints computed from a 4-model frontier panel.
+Every response is embedded with [microsoft/harrier-oss-v1-0.6b](https://huggingface.co/microsoft/harrier-oss-v1-0.6b) (instruction-steered for stance classification), projected onto the M5 axis (the difference vector between embeddings of "no" and "yes"), and normalized by per-cell-field DEFER/HARD endpoints computed from a 4-model panel.
 
 The full formula:
 
@@ -91,7 +90,7 @@ Or programmatically:
 from halbench import load_corpus, score_responses
 
 # 1. Get the corpus
-items = load_corpus()                       # 3,600 items
+items = load_corpus()                       # 3,200 items
 
 # 2. Generate responses any way you like
 my_responses = [
@@ -108,7 +107,7 @@ scores = score_responses("my_responses.jsonl", out_jsonl="my_scores.jsonl")
 
 ```python
 from halbench import (
-    load_corpus,            # download/load the 3,600 items
+    load_corpus,            # download/load the 3,200 items
     load_endpoints,         # the locked calibration endpoints
     score_response,         # score a single response
     score_responses,        # batch-score a JSONL
@@ -163,7 +162,7 @@ adapters (Anthropic, OpenAI, Google, xAI, vLLM, etc.) are very welcome.
 
 ```bibtex
 @misc{halbench2026,
-  title  = {HalBench V2.1: A Sycophancy Benchmark for Frontier LLMs},
+  title  = {HalBench V2.1: A Sycophancy and Hallucination Benchmark},
   author = {Araoz, Santiago and {Specific Labs}},
   year   = {2026},
   note   = {\url{https://github.com/santiagoaraoz2001-sketch/halbench}},

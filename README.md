@@ -1,6 +1,6 @@
 # HalBench
 
-A behavioral benchmark for how frontier language models respond when a user's prompt is built on a false premise: a fabricated reference, an overstated scope, an authority misapplied, an unanswerable question. Continuous scoring on `0 → 1`. Higher means more honest pushback.
+A behavioral benchmark for **sycophancy and hallucination** in LLMs. The corpus consists of prompts built on a false premise (a fabricated reference, an overstated scope, an authority misapplied, an unanswerable question). When a model produces the requested content anyway, that single response is *both* failures at once: sycophantic (it agreed with a framing it should have flagged) *and* hallucinatory (the produced content elaborates on something that doesn't exist or can't be answered). HalBench reports one number per response that captures *how much false-premise content the model produced under social pressure*. Continuous scoring on `0 → 1`. Higher means more honest pushback; lower means more agreement and more fabrication.
 
 - **Live Space + leaderboard**: https://huggingface.co/spaces/Specific-Labs/halbench
 - **Dataset (corpus + responses + scores)**: https://huggingface.co/datasets/Specific-Labs/halbench
@@ -13,7 +13,7 @@ A behavioral benchmark for how frontier language models respond when a user's pr
 | `halbench-pkg/` | The runnable Python package. CLI to run any OpenRouter-accessible model on the corpus, score responses, and produce a leaderboard submission. |
 | `space/` | Source for the public Gradio Space (HF Space mirrors this directory). |
 | `corpus/items/` | 3,200 prompt items, 100 per cell-field, across 32 cell-fields (8 mechanisms × 4 domains). |
-| `corpus/cross_author_paragraph_anchors.json` | DEFER / SOFT / HARD reference paragraphs by a four-model frontier panel. Used to calibrate endpoints. |
+| `corpus/cross_author_paragraph_anchors.json` | DEFER / SOFT / HARD reference paragraphs by a four-model panel. Used to calibrate endpoints. |
 | `corpus/calibration_endpoints.json` | Locked per-cell-field DEFER / HARD endpoints. |
 | `corpus/anchor_library.json` | Generic stance anchors used to define the M5 axis. |
 
@@ -49,7 +49,7 @@ Item IDs follow `{cell}_{field}__synth_{####}` (e.g. `B2_GC__synth_0015`).
 
 ## Scoring in one paragraph
 
-Each response is split into sentences, embedded with [`microsoft/harrier-oss-v1-0.6b`](https://huggingface.co/microsoft/harrier-oss-v1-0.6b), and projected onto the M5 axis (the difference vector between embeddings of *"no"* and *"yes"*). A per-cell-field DEFER / HARD baseline computed from a four-model frontier panel normalizes each per-sentence projection into `[0, 1]`. The arithmetic mean across sentences is the final score. The pipeline is deterministic; per-sentence vectors are preserved so any score can be inspected.
+Each response is split into sentences, embedded with [`microsoft/harrier-oss-v1-0.6b`](https://huggingface.co/microsoft/harrier-oss-v1-0.6b), and projected onto the M5 axis (the difference vector between embeddings of *"no"* and *"yes"*). A per-cell-field DEFER / HARD baseline computed from a four-model panel normalizes each per-sentence projection into `[0, 1]`. The arithmetic mean across sentences is the final score. The pipeline is deterministic; per-sentence vectors are preserved so any score can be inspected.
 
 Full derivation, ablations, validation: [Methodology tab on the Space](https://huggingface.co/spaces/Specific-Labs/halbench).
 
@@ -65,7 +65,7 @@ This is **not a safety benchmark**. It does not measure whether a model refuses 
 
 ```bibtex
 @misc{halbench2026,
-  title  = {HalBench: a sycophancy and hallucination benchmark for frontier LLMs},
+  title  = {HalBench: a sycophancy and hallucination benchmark for LLMs},
   author = {Specific Labs},
   year   = {2026},
   url    = {https://github.com/santiagoaraoz2001-sketch/halbench},

@@ -8,17 +8,17 @@ sdk_version: 5.0.0
 app_file: app.py
 pinned: true
 license: cc-by-nc-4.0
-short_description: A sycophancy/hallucination benchmark for frontier LLMs
+short_description: A sycophancy and hallucination benchmark
 ---
 
-# HalBench V2.1 — Sycophancy Leaderboard for Frontier LLMs
+# HalBench (v2.2.1) — Sycophancy and Hallucination Leaderboard
 
 This Space is the public-facing companion to **HalBench V2.1**, a sycophancy benchmark for large language models built at Specific Labs.
 
 ## What you'll find here
 
-- **Leaderboard** — overall + per-mechanism + per-domain rankings for 4 frontier models (Sonnet 4.6, GPT-5.4, Gemini 3.1 Pro, Grok 4.3) on 3,600 corpus items, with full statistical tests.
-- **Heatmaps** — interactive Plotly heatmaps showing where each model is strong vs weak across the 9 × 4 grid of (mechanism × domain).
+- **Leaderboard** — overall + per-mechanism + per-domain rankings for the 4-model panel (Sonnet 4.6, GPT-5.4, Gemini 3.1 Pro, Grok 4.3) on 3,200 corpus items, with full statistical tests.
+- **Heatmaps** — interactive Plotly heatmaps showing where each model is strong vs weak across the 8 × 4 grid of (mechanism × domain).
 - **Item Explorer** — pick any item, see the prompt + all 4 model responses + their scores side-by-side. This is where you decide whether to trust the scoring.
 - **Anchor Library** — view the human-readable reference paragraphs that anchor 0 and 1 for each cell-field.
 - **Methodology** — full scoring formula (`multi_norm_cell_mean`), Harrier embedding details, calibration procedure, anomaly handling.
@@ -38,7 +38,7 @@ The corpus, responses, scores, and calibration endpoints are also published as a
 
 - Built by **Specific Labs**
 - Embeddings: Microsoft **Harrier-OSS-v1-0.6b** via HF Inference
-- Frontier panel: Anthropic, OpenAI, Google DeepMind, xAI
+- Panel: Anthropic, OpenAI, Google DeepMind, xAI
 
 ## License
 
