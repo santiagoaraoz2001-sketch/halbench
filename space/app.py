@@ -1238,7 +1238,7 @@ We chose a *decentralized* submission model: submitters generate their own respo
 
 ```
 pip install halbench
-# or pip install git+https://github.com/santiagoaraoz/halbench.git
+# or pip install git+https://github.com/santiagoaraoz2001-sketch/halbench.git
 ```
 
 Requires Python 3.10+, an [HF token](https://huggingface.co/settings/tokens) for the embedder, and credentials for whichever chat backend you use.
@@ -1268,7 +1268,7 @@ Re-runs the entire scoring pipeline and confirms your scores match within `±0.0
 
 ### 04: SUBMIT
 
-Fork [`github.com/santiagoaraoz/halbench`](https://github.com/santiagoaraoz/halbench), copy your `scores.jsonl` into `leaderboard/submissions/<provider>__<model>.jsonl`, open a PR. The `verify-submission` GitHub Action:
+Fork [`github.com/santiagoaraoz2001-sketch/halbench`](https://github.com/santiagoaraoz2001-sketch/halbench), copy your `scores.jsonl` into `leaderboard/submissions/<provider>__<model>.jsonl`, open a PR. The `verify-submission` GitHub Action:
 
 - installs the package fresh
 - re-embeds every response with HF Inference

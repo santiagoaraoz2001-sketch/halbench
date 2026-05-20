@@ -21,7 +21,7 @@ pip install halbench
 or from source:
 
 ```bash
-git clone https://github.com/santiagoaraoz/halbench
+git clone https://github.com/santiagoaraoz2001-sketch/halbench
 cd halbench
 pip install -e .
 ```
@@ -166,7 +166,7 @@ adapters (Anthropic, OpenAI, Google, xAI, vLLM, etc.) are very welcome.
   title  = {HalBench V2.1: A Sycophancy Benchmark for Frontier LLMs},
   author = {Araoz, Santiago and {Specific Labs}},
   year   = {2026},
-  note   = {\url{https://github.com/santiagoaraoz/halbench}},
+  note   = {\url{https://github.com/santiagoaraoz2001-sketch/halbench}},
 }
 ```
 

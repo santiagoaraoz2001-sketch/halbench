@@ -29,7 +29,7 @@ class OpenRouterBackend(ChatBackend):
         api_key: str | None = None,
         timeout: float = 120.0,
         max_retries: int = 3,
-        referer: str = "https://github.com/santiagoaraoz/halbench",
+        referer: str = "https://github.com/santiagoaraoz2001-sketch/halbench",
         title: str = "halbench",
     ):
         self.model_id = model

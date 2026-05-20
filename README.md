@@ -68,7 +68,7 @@ This is **not a safety benchmark**. It does not measure whether a model refuses 
   title  = {HalBench: a sycophancy and hallucination benchmark for frontier LLMs},
   author = {Specific Labs},
   year   = {2026},
-  url    = {https://github.com/santiagoaraoz/halbench},
+  url    = {https://github.com/santiagoaraoz2001-sketch/halbench},
 }
 ```
 

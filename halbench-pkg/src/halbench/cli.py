@@ -69,7 +69,7 @@ def cmd_submit(args: argparse.Namespace) -> int:
     print(f"""
 To submit {fn} to the public leaderboard:
 
-  1. Fork  https://github.com/santiagoaraoz/halbench  on GitHub.
+  1. Fork  https://github.com/santiagoaraoz2001-sketch/halbench  on GitHub.
   2. Clone your fork and copy the submission in:
 
        mkdir -p leaderboard/submissions

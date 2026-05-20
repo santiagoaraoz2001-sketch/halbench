@@ -1,6 +1,6 @@
 # Deploying the halbench package + repo to GitHub
 
-This walks through pushing the package to `github.com/santiagoaraoz/halbench` and (optionally) publishing it to PyPI.
+This walks through pushing the package to `github.com/santiagoaraoz2001-sketch/halbench` and (optionally) publishing it to PyPI.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ gh repo create halbench \
   --push
 ```
 
-After this, the repo lives at `https://github.com/santiagoaraoz/halbench`.
+After this, the repo lives at `https://github.com/santiagoaraoz2001-sketch/halbench`.
 
 ## 2. Configure CI secrets
 
@@ -69,7 +69,7 @@ You'll need a PyPI account and an API token from https://pypi.org/manage/account
 If you don't publish to PyPI, users can still install via:
 
 ```bash
-pip install git+https://github.com/santiagoaraoz/halbench.git
+pip install git+https://github.com/santiagoaraoz2001-sketch/halbench.git
 ```
 
 ## 4. Smoke-test the deployed flow
@@ -78,7 +78,7 @@ After the repo is live, anyone can:
 
 ```bash
 # Install
-pip install git+https://github.com/santiagoaraoz/halbench.git
+pip install git+https://github.com/santiagoaraoz2001-sketch/halbench.git
 # (or pip install halbench if you published)
 
 # Set credentials
