@@ -1534,11 +1534,16 @@ with gr.Blocks(title="HalBench v2.2.1 // Specific Labs", theme=theme, css=CSS) a
 
 
 if __name__ == "__main__":
+    import os
+    # On HF Spaces, GRADIO_SERVER_NAME is set to 0.0.0.0 by the platform.
+    # Locally we want 127.0.0.1. Honor the env var if present.
+    server_name = os.environ.get("GRADIO_SERVER_NAME", "127.0.0.1")
     demo.launch(
         share=False,
-        server_name="127.0.0.1",
-        server_port=7860,
-        inbrowser=True,
+        server_name=server_name,
+        server_port=int(os.environ.get("GRADIO_SERVER_PORT", "7860")),
+        inbrowser=(server_name == "127.0.0.1"),
         show_api=False,
         quiet=False,
+        ssr_mode=False,
     )
