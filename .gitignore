@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Virtual envs
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Halbench-specific: regenerated artifacts that should NOT be in git
+# - Per-model responses + scores live on the HF Dataset, not in the repo
+# - The Space data bundle (space/data/) is regenerated via prepare_space_data.py
+runs/
+results/
+outputs/
+space/data/
+
+# Backups
+*.bak
+*.bak_*
+
+# Secrets
+.env
+*.pem
+*.key
+.secrets/

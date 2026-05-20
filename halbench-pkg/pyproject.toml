@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "halbench"
+version = "2.2.0"
+description = "HalBench: a sycophancy and hallucination benchmark runner for frontier LLMs"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Specific Labs" }]
+keywords = ["llm", "benchmark", "sycophancy", "hallucination", "evaluation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+hf = ["datasets>=2.20", "huggingface_hub>=0.24"]
+dev = ["pytest>=8.0", "pytest-mock>=3.12"]
+
+[project.urls]
+Homepage = "https://github.com/santiagoaraoz/halbench"
+Repository = "https://github.com/santiagoaraoz/halbench"
+Issues = "https://github.com/santiagoaraoz/halbench/issues"
+"HF Space" = "https://huggingface.co/spaces/Specific-Labs/halbench"
+"HF Dataset" = "https://huggingface.co/datasets/Specific-Labs/halbench"
+
+[project.scripts]
+halbench = "halbench.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/halbench"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/halbench", "README.md", "LICENSE", "src/halbench/data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

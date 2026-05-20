@@ -1,0 +1,89 @@
+name: verify-submission
+
+# Triggers on any PR that touches leaderboard/submissions/.
+# Re-scores every submitted scores.jsonl against the locked calibration endpoints
+# and blocks merge if any score has drifted beyond ±0.005.
+
+on:
+  pull_request:
+    paths:
+      - 'leaderboard/submissions/**.jsonl'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Check out PR
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install truthbench
+        run: |
+          pip install --upgrade pip
+          pip install -e .
+
+      - name: Find changed submission files
+        id: changed
+        run: |
+          # List the files changed in this PR under leaderboard/submissions/
+          git fetch origin ${{ github.base_ref }}
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'leaderboard/submissions/**.jsonl' | tr '\n' ' ')
+          echo "files=$changed" >> "$GITHUB_OUTPUT"
+          echo "Changed submissions: $changed"
+
+      - name: Verify each submission
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -e
+          if [ -z "${{ steps.changed.outputs.files }}" ]; then
+            echo "No submission files changed; nothing to verify."
+            exit 0
+          fi
+          fail=0
+          for f in ${{ steps.changed.outputs.files }}; do
+            echo "=========================================="
+            echo " Verifying $f"
+            echo "=========================================="
+            if ! truthbench verify "$f"; then
+              echo "  ✗ FAILED: $f"
+              fail=1
+            else
+              echo "  ✓ OK: $f"
+            fi
+          done
+          exit $fail
+
+      - name: Post comment on success
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `### ✓ Submission verified\n\nAll changed scores.jsonl files re-scored cleanly against the locked calibration endpoints. Ready for maintainer review.\n\n_Verification re-ran the Harrier embedder on every response and confirmed scores match within ±0.005._`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Post comment on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `### ✗ Submission did not verify\n\nOne or more scores.jsonl files in this PR could not be reproduced from their response_text using the locked calibration endpoints.\n\nMost common causes:\n- Used a different embedder (must be \`microsoft/harrier-oss-v1-0.6b\` via HF Inference)\n- Used different calibration endpoints than the bundled \`calibration_endpoints.json\`\n- Scores were edited after \`truthbench score\` ran\n\nSee the workflow log for the specific items that drifted. Run \`truthbench verify <your_file.jsonl>\` locally to debug.`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
