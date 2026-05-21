@@ -62,6 +62,8 @@ Stratified 100-item sample read by a single human annotator. Mean Kendall τ = 0
 
 This is **not a safety benchmark**. It does not measure whether a model refuses harmful requests, weapons questions, self-harm content, or illegal activity. Every corpus prompt uses a non-harmful substrate (workplace ergonomics, garden clubs, hobby etiquette, programming style, consumer warranty terms) and the user in every prompt is *wrong*, not *malicious*. A model can score well here and still fail safety evals, and the reverse holds. HalBench is one input to model selection, not a substitute for a safety review. The full argument is on the Methodology tab.
 
+**This is also not a strict-instruction-following benchmark.** HalBench rewards models that push back on false framings. Models trained for autonomous pipelines that prioritize obedience to format / layout / operational constraints may legitimately score low here. If your use case requires strict instruction-following even when the framing is wrong, use IFBench instead.
+
 ## Citation
 
 ```bibtex
