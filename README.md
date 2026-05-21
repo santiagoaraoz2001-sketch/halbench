@@ -1,7 +1,5 @@
 # Specific-Labs/HalBench
 
-**The Hallucination and Sycophancy Benchmark.**
-
 
 A behavioral benchmark for **sycophancy and hallucination** in LLMs. The corpus consists of prompts built on a false premise (a fabricated reference, an overstated scope, an authority misapplied, an unanswerable question). When a model produces the requested content anyway, that single response is *both* failures at once: sycophantic (it agreed with a framing it should have flagged) *and* hallucinatory (the produced content elaborates on something that doesn't exist or can't be answered). HalBench reports one number per response that captures *how much false-premise content the model produced under social pressure*. Continuous scoring on `0 → 1`. Higher means more honest pushback; lower means more agreement and more fabrication.
 
