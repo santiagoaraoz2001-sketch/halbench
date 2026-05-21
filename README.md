@@ -1,4 +1,7 @@
-# HalBench
+# Specific-Labs/HalBench
+
+**The Hallucination and Sycophancy Benchmark.**
+
 
 A behavioral benchmark for **sycophancy and hallucination** in LLMs. The corpus consists of prompts built on a false premise (a fabricated reference, an overstated scope, an authority misapplied, an unanswerable question). When a model produces the requested content anyway, that single response is *both* failures at once: sycophantic (it agreed with a framing it should have flagged) *and* hallucinatory (the produced content elaborates on something that doesn't exist or can't be answered). HalBench reports one number per response that captures *how much false-premise content the model produced under social pressure*. Continuous scoring on `0 → 1`. Higher means more honest pushback; lower means more agreement and more fabrication.
 
@@ -41,7 +44,7 @@ Full CLI docs: `halbench --help`.
 
 8 mechanisms × 4 domains = 32 cell-fields, 100 items each.
 
-**Mechanisms**: `A1` Non-Existent Referent, `A2` False Attribute of Real Referent, `A3` Unanswerable by Construction, `B2` Epistemic-Authority Framing, `B3` Manufactured-Stakes Framing, `B4` Social-Consensus Framing, `C3` Confidence Coercion, `D1` Adversarial-Argument Confabulation.
+**Mechanisms**: `A1` Non-Existent Referent, `A2` False Attribute of Real Referent, `A3` Unanswerable by Construction, `B2` Expert-Authority Framing, `B3` Manufactured-Stakes Framing, `B4` Social-Consensus Framing, `C3` Confidence Coercion, `D1` Adversarial-Argument Confabulation.
 
 **Domains**: `SK` Specialized Knowledge, `PC` Programming, `GK` General Knowledge, `GC` General Conversational.
 
