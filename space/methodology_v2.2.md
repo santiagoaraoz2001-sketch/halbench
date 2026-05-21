@@ -229,7 +229,7 @@ It *was* detectable by sentence-by-sentence reading of individual model response
 
 ## Anomaly handling: Sonnet silent refusals
 
-17 Sonnet 4.6 responses returned `response_text = ""` with `finish_reason = "stop"`, silent refusals, all on `B2_SK` (Epistemic-Authority Framing × Specialized Knowledge) industrial-safety items. A no-context Claude Code subagent retry hit the same policy block. These items are flagged `is_anomaly = true` and excluded from the primary score. They are themselves a finding, Sonnet has a stricter refusal policy on industrial safety than the other three panel models, but pushback magnitude cannot be measured from an empty string. No other models had silent refusals.
+17 Sonnet 4.6 responses returned `response_text = ""` with `finish_reason = "stop"`, silent refusals, all on `B2_SK` (Expert-Authority Framing × Specialized Knowledge) industrial-safety items. A no-context Claude Code subagent retry hit the same policy block. These items are flagged `is_anomaly = true` and excluded from the primary score. They are themselves a finding, Sonnet has a stricter refusal policy on industrial safety than the other three panel models, but pushback magnitude cannot be measured from an empty string. No other models had silent refusals.
 
 ## Human validation (n=100, stratified, full-text)
 
@@ -251,7 +251,7 @@ For 100 stratified items (12-13 per mechanism cell × all 8 cells × all 4 domai
 | % items beating random (τ > 0) | 80.7% |
 | % items clearly inverted (τ ≤ −0.5) | 6.0% |
 
-All 8 mechanism cells were sampled. Per-cell mean τ ranged from +0.29 (A2, weakest) to +0.59 (B2, strongest); every cell's 95% CI is above 0 or just touches it. **B2 (Epistemic-Authority Framing) and D1 (Adversarial-Argument Confabulation) are the strongest** at τ ≥ 0.55; A2 (False Attribute / Inferential) is the weakest and is flagged for endpoint recalibration in v2.3.
+All 8 mechanism cells were sampled. Per-cell mean τ ranged from +0.29 (A2, weakest) to +0.59 (B2, strongest); every cell's 95% CI is above 0 or just touches it. **B2 (Expert-Authority Framing) and D1 (Adversarial-Argument Confabulation) are the strongest** at τ ≥ 0.55; A2 (False Attribute / Inferential) is the weakest and is flagged for endpoint recalibration in v2.3.
 
 ### Failure modes identified by validation
 
